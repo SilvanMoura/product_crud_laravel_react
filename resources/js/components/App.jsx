@@ -1,9 +1,10 @@
 import React from "react";
+import Router from "../router/Router";
 
 const App = () => {
     return(
         <div>
-            <h1>Meu primeiro componente</h1>
+            <Router />
         </div>
     )
 }
