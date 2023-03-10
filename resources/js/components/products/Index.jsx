@@ -1,6 +1,14 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
-const Index = () =>{
+const Index = () => {
+
+    const navigate = useNavigate();
+
+    const newProduct = () => {
+        navigate("/product/new");
+    }
+
     return(
         <div className="container">
             <div className="products_list">
@@ -8,12 +16,12 @@ const Index = () =>{
                 <div className="titlebar">
 
                     <div className="titlebar_item">
-                        <h1>Products</h1>
+                        <h1>Produtos</h1>
                     </div>
 
                     <div className="titlebar_item">
-                        <div className="btn">
-                            Add Product
+                        <div className="btn" onClick={() => newProduct()}>
+                            Adicionar produto
                         </div>
                     </div>
 
