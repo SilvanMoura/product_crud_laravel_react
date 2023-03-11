@@ -41,7 +41,7 @@ const New = () => {
         formData.append('quantity', quantity);
         formData.append('price', price);
 
-        await axios.post("/api;add_product/", formData)
+        await axios.post("/api/addProduct/", formData)
         .then( ({data}) => {
             toast.fire({
                 icon: "success",
