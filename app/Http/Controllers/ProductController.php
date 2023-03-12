@@ -28,7 +28,6 @@ class ProductController extends Controller
             $name = time().".".$ex;
             $img = Image::make($request->photo)->resize(117,100);
             $upload_path = public_path()."/upload/";
-            echo($upload_path);
             $img->save($upload_path.$name);
             $product->photo = $name;
         }else{
@@ -40,5 +39,11 @@ class ProductController extends Controller
         $product->quantity = $request->quantity;
         $product->price = $request->price;
         $product->save();
+    }
+
+    public function getEditProduct($id){
+        $product = Product::where([['id', $id]])->get();
+
+        return response()->json(['product' => $product],200);
     }
 }
