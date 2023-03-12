@@ -8,6 +8,13 @@ use Intervention\Image\Facades\Image;
 
 class ProductController extends Controller
 {
+
+    public function getAllProducts(){
+        $products = Product::all();
+        
+        return response()->json(['products'=>$products], 200);
+    }
+
     public function addProduct(Request $request){
         $product = new Product();
 
@@ -15,12 +22,13 @@ class ProductController extends Controller
         $product->description = $request->description;
 
         if($request->photo != ""){
-            $strpos = strpos($reques->photo, ';');
+            $strpos = strpos($request->photo, ';');
             $sub = substr($request->photo,0,$strpos);
             $ex = explode('/', $sub)[1];
             $name = time().".".$ex;
-            $img = Image::make($request->photo)->resize(117,600);
+            $img = Image::make($request->photo)->resize(117,100);
             $upload_path = public_path()."/upload/";
+            echo($upload_path);
             $img->save($upload_path.$name);
             $product->photo = $name;
         }else{
