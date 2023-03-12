@@ -14,13 +14,17 @@ const Index = () => {
 
     useEffect(()=>{
         getProducts();
-    })
+    }, products)
 
     const getProducts = async () => {
         await axios.get("/api/getAllProducts")
         .then(({data})=>{
             setProducts(data.products);
         })
+    }
+
+    const editProduct = (id) => {
+        navigate('/product/edit/'+id);
     }
 
     return(
@@ -60,7 +64,7 @@ const Index = () => {
                                     <p>{item.type}</p>
                                     <p>{item.quantity}</p>
                                     <div>
-                                        <button className="btn-icon success">
+                                        <button className="btn-icon success" onClick={()=>editProduct(item.id)}>
                                             <i className="fas fa-pencil-alt"></i>
                                         </button>
                                         <button className="btn-icon danger">
