@@ -23,3 +23,4 @@ Route::post('/addProduct', [ProductController::class, 'addProduct']);
 Route::get('/getAllProducts', [ProductController::class, 'getAllProducts']);
 Route::get('/getEditProduct/{id}', [ProductController::class, 'getEditProduct']);
 Route::post('/updateProduct/{id}', [ProductController::class, 'updateProduct']);
+Route::get('/deleteProduct/{id}', [ProductController::class, 'deleteProduct']);

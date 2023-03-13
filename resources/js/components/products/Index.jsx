@@ -27,6 +27,34 @@ const Index = () => {
         navigate('/product/edit/'+id);
     }
 
+    const deleteProduct = async (id) => {
+        Swal.fire({
+            title: "Tem certeza?",
+            text: "Você não será capaz de reverter isso!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sim, apague!'
+        })
+        .then((result) =>{
+            if(result.isConfirmed){
+                axios.get('/api/deleteProduct/'+id)
+                .then(()=>{
+                    Swal.fire(
+                        'Deletado!',
+                        'Produto excluído com sucesso',
+                        'success'
+                    )
+                    getProducts()
+                })
+                .catch(()=>{
+
+                })
+            }
+        })
+    }
+
     return(
         <div className="container">
             <div className="products_list">
@@ -67,7 +95,7 @@ const Index = () => {
                                         <button className="btn-icon success" onClick={()=>editProduct(item.id)}>
                                             <i className="fas fa-pencil-alt"></i>
                                         </button>
-                                        <button className="btn-icon danger">
+                                        <button className="btn-icon danger" onClick={()=>deleteProduct(item.id)}>
                                             <i className="fas fa-trash-alt"></i>
                                         </button>
                                     </div>
