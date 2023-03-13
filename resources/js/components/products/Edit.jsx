@@ -36,7 +36,7 @@ const Edit = () => {
     const ourImage = (img) => {
         return `/upload/${img}`;
     }
-    console.log(photo)
+    
     const changeHandler = (e) =>{
         let file = e.target.files[0];
         let limit = 1024 * 1024 * 2;
@@ -57,6 +57,31 @@ const Edit = () => {
         }
     }
 
+    const updateProduct = async (e) => {
+        e.preventDefault()
+
+        const formData = new FormData()
+
+        formData.append('name', name);
+        formData.append('description', description);
+        formData.append('photo', photo);
+        formData.append('type', type);
+        formData.append('quantity', quantity);
+        formData.append('price', price);
+
+        await axios.post(`/api/updateProduct/${id}`, formData)
+        .then( ({data}) => {
+            toast.fire({
+                icon: "success",
+                title: "Produto atualizado com sucesso"
+            })
+            navigate("/");
+        } )
+        .catch( ({response})=>{
+
+        } )
+    }
+
     return(
         <div className="container">
 
@@ -67,7 +92,7 @@ const Edit = () => {
                         <h1>Editar produto</h1>
                     </div>
                     <div className="titlebar_item">
-                        <button className="btn">
+                        <button className="btn" onClick={(event)=>updateProduct(event)}>
                             Salvar
                         </button>
                     </div>
@@ -131,7 +156,7 @@ const Edit = () => {
                     <div className="titlebar_item">
                     </div>
                     <div className="titlebar_item">
-                        <button className="btn">
+                        <button className="btn" onClick={(event)=>updateProduct(event)}>
                             Salvar
                         </button>
                     </div>
